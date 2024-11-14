@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35424.110 d17.12
+VisualStudioVersion = 17.12.35424.110
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmissorCartoes", "EmissorCartoes\EmissorCartoes.csproj", "{EBB87ED0-290A-4969-81B8-0D5845FA0214}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmissorCartoes.Api", "EmissorCartoes\EmissorCartoes.Api.csproj", "{EBB87ED0-290A-4969-81B8-0D5845FA0214}"
+	ProjectSection(ProjectDependencies) = postProject
+		{17D945D8-1196-4BEE-91AE-B7EBB0C142FB} = {17D945D8-1196-4BEE-91AE-B7EBB0C142FB}
+		{6914BC7E-B08D-4D9B-B2A2-79F2D54322B0} = {6914BC7E-B08D-4D9B-B2A2-79F2D54322B0}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmissorCartoes.Dominio", "EmissorCartoes.Dominio\EmissorCartoes.Dominio.csproj", "{6914BC7E-B08D-4D9B-B2A2-79F2D54322B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmissorCartoes.Infraestrutura", "EmissaorCartoes.Infraestrutura\EmissorCartoes.Infraestrutura.csproj", "{17D945D8-1196-4BEE-91AE-B7EBB0C142FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,14 @@ Global
 		{EBB87ED0-290A-4969-81B8-0D5845FA0214}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBB87ED0-290A-4969-81B8-0D5845FA0214}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBB87ED0-290A-4969-81B8-0D5845FA0214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6914BC7E-B08D-4D9B-B2A2-79F2D54322B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6914BC7E-B08D-4D9B-B2A2-79F2D54322B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6914BC7E-B08D-4D9B-B2A2-79F2D54322B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6914BC7E-B08D-4D9B-B2A2-79F2D54322B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17D945D8-1196-4BEE-91AE-B7EBB0C142FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D945D8-1196-4BEE-91AE-B7EBB0C142FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D945D8-1196-4BEE-91AE-B7EBB0C142FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D945D8-1196-4BEE-91AE-B7EBB0C142FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
