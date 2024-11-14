@@ -5,6 +5,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 
 namespace EmissorCartoes.Api.Consumers;
 
@@ -14,10 +15,11 @@ public class PropostaCreditoConsumer : BackgroundService
     private readonly IConnection connection;
     private readonly IModel channel;
     private readonly IServiceProvider services;
+    private readonly ILogger<PropostaCreditoConsumer> logger;
 
     private const string Queue = "queue.emissaocartaocredito.v1";
 
-    public PropostaCreditoConsumer(IServiceProvider services)
+    public PropostaCreditoConsumer(ILogger<PropostaCreditoConsumer> logger, IServiceProvider services)
     {
         var connectionFactory = new ConnectionFactory
         {
@@ -34,6 +36,7 @@ public class PropostaCreditoConsumer : BackgroundService
             exclusive: false,
             autoDelete: false);
 
+        this.logger = logger;
         this.services = services;
 
     }
@@ -42,14 +45,20 @@ public class PropostaCreditoConsumer : BackgroundService
     {
         var consumer = new EventingBasicConsumer(channel);
 
-        consumer.Received += (sender, eventArgs) =>
+        consumer.Received += async (sender, eventArgs) =>
         {
             var contentArray = eventArgs.Body.ToArray();
 
             var contentString = Encoding.UTF8.GetString(contentArray);
             var propostaCredito = JsonConvert.DeserializeObject<PropostaCredito>(contentString);
 
-            Complete(propostaCredito).Wait();
+            if (propostaCredito == null)
+            {
+                logger.LogError("Proposta de credito recebida é nula ou inválida");
+                return;
+            }
+
+            await Complete(propostaCredito);
 
             channel.BasicAck(eventArgs.DeliveryTag, false);
         };
